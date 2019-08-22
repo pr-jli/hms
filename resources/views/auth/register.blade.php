@@ -65,7 +65,7 @@
                             <label for="admission_number" class="col-md-4 col-form-label text-md-right">{{ __('Admission Number:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="admission_number" type="text" class="form-control" name="admission_number" placeholder="17CS057" required autocomplete="admission_number" >
+                                <input id="admission_number" type="text" class="form-control" name="admission_number" placeholder="17CS057" required autocomplete="admission_number" maxlength="8" required >
 
                                 @error('admission_number')
                                 <span class="invalid-feedback" role="alert">
@@ -79,7 +79,7 @@
                             <label for="roll_number" class="col-md-4 col-form-label text-md-right">{{ __('University Roll Number:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="roll_number" type="text" class="form-control" name="roll_number" placeholder="11-digits University Roll Number" required autocomplete="roll_number" >
+                                <input id="roll_number" type="text" class="form-control" name="roll_number" placeholder="11-digits University Roll Number" required autocomplete="roll_number" maxlength="11" required >
                                 @error('roll_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -92,7 +92,7 @@
                             <label for="mobile_number" class="col-md-4 col-form-label text-md-right">{{ __('Mobile Number:') }}</label>
 
                             <div class="col-md-6">
-                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" placeholder="Enter Mobile Number" required autocomplete="mobile_number" >
+                                <input id="mobile_number" type="text" class="form-control" name="mobile_number" placeholder="Enter Mobile Number" required autocomplete="mobile_number" maxlength="10" required>
                                 @error('mobile_number')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

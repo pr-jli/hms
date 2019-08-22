@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->biginteger('roll_number')->unique()->unsigned()->default(0)->length(11);
-            $table->string('admission_number')->unique()->length(7);
+            $table->string('admission_number')->unique()->length(8);
             $table->biginteger('mobile_number')->length(10);
             $table->integer('year')->length(1)->default(0);
             $table->boolean('fee_status')->default(false);

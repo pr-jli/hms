@@ -50,19 +50,26 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        // dd('hello');
+
         return Validator::make($data, [
-            // 'name' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            // 'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'mobile_number' => 'required|unique:users|min:10|max:10',
-            // 'admission_number' => 'required|unique:users|min:7|max:7',
-            // 'roll_number' =>'required|unique:users|min:11|max:11',
-            // 'year'=>'required',
-            // 'gender'=>'required',
-            // 'is_hosteler'=>'required',
-            // 'type' => User::DEFAULT_TYPE, 
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+
+            'mobile_number' => 'required|max:10',
+
+            'admission_number' => 'unique:users|required|max:8',
+            'roll_number' =>'required|max:11',
+            'year'=>'required',
+            'gender'=>'required',
+            'is_hosteler'=>'required',
+            
             
         ]);
+
+        
+
     }
 
     /**
@@ -73,27 +80,51 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-            'mobile_number' =>  $data['mobile_number'],
-            'admission_number' =>  $data['admission_number'],
-            'roll_number' => $data['roll_number'],
-            'year'=> $data['year'],
-            'gender'=> $data['gender'],
-            'is_hosteler'=> $data['is_hosteler'],
-            'type' => User::DEFAULT_TYPE, 
-        ]);
-    }
+        //dd($data);
+        // $validator = Validator::make($data, [
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|string|email|max:255|unique:users',
+        //     'password' => 'required|string|min:8|confirmed',
+        //     'mobile_number' => 'required|unique:users|min:10|max:10',
+        //     'admission_number' => 'required|unique:users|min:7|max:7',
+        //     'roll_number' =>'required|unique:users|min:11|max:11',
+        //     'year'=>'required',
+        //     'gender'=>'required',
+        //     'is_hosteler'=>'required',
 
-  public function register(Request $request)
-    {
-        $this->validator($request->all())->validate();
+        // ]);
+        // if ($validator->fails())
+        //  {
+        //     return redirect('/register')
+        //     ->withErrors($validator)
+        //     ->withInput();
+        // }
+        // else
+        // {
+            return User::create([
+                'name' => $data['name'],
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+                'mobile_number' =>  $data['mobile_number'],
+                'admission_number' =>  $data['admission_number'],
+                'roll_number' => $data['roll_number'],
+                'year'=> $data['year'],
+                'gender'=> $data['gender'],
+                'is_hosteler'=> $data['is_hosteler'],
+                 
+            ]);
+    // }
+}
 
-        event(new Registered($user = $this->create($request->all())));
+public function register(Request $request)
+{
 
-        return $this->registered($request, $user)
-            ?: redirect($this->redirectPath());
-    }
+    //dd("helo");
+    $this->validator($request->all())->validate();
+
+    event(new Registered($user = $this->create($request->all())));
+
+    return $this->registered($request, $user)
+    ?: redirect($this->redirectPath());
+}
 }
